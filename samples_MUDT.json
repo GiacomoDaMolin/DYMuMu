@@ -1,0 +1,18 @@
+{
+    "SingleMuon_A": {
+        "dataset": "/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD",
+        "first_data": true
+    },
+    "SingleMuon_B": {
+        "dataset": "/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD",
+        "first_data": true
+    },
+    "SingleMuon_C": {
+        "dataset": "/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD",
+        "first_data": true
+    },
+    "SingleMuon_D": {
+        "dataset": "/SingleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD",
+        "first_data": true
+    }
+}
