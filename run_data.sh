@@ -18,8 +18,8 @@ while getopts "i:o:f:" opt; do
 done
 
 
-EXE="/afs/cern.ch/user/g/gdamolin/DYMuMu/DY_DT.exe"
-outdir="/afs/cern.ch/user/g/gdamolin/DYMuMu/SUBDIR"
+EXE="/afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/DY_DT.exe"
+outdir="/afs/cern.ch/user/g/gdamolin/DYMUMU/SUBDIR"
 filename=$INFILE
 filestring=$(echo $filename | sed 's|\(^.*/\)\([a-z,A-Z,0-9,-]*\).root$|\2|')
 ofilename=${outdir}/$filestring"_MA".root

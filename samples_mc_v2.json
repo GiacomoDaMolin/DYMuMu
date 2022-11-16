@@ -68,5 +68,19 @@
         "dataset": "/ZZ_TuneCP5_13TeV-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
         "Sum_w": 3907000.0,
         "N_events": 3907000
+    },
+    "St": {
+        "xs": 32450,
+        "signal": false,
+        "dataset": "/ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV_PDFWeights-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM",
+        "Sum_w": 400274110.3296001,
+        "N_events": 12336798
+    },
+    "Santit": {
+        "xs": 32510,
+        "signal": false,
+        "dataset": "/ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_13TeV_PDFWeights-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM",
+        "Sum_w": 376234621.7050001,
+        "N_events": 11573849
     }
 }
