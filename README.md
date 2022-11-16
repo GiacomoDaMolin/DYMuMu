@@ -1,6 +1,7 @@
 # DYMuMu
 Study of DY->MuMu at CMS
-Hitchhiker’s guide to the galaxy
+
+Hitchhiker’s guide to the galaxy of forgettable Unix commands:
 
 A) create afs submit directory (where .dag and rescue are placed) and eos (root file storage)
 
