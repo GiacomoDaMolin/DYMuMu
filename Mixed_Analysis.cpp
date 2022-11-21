@@ -248,6 +248,7 @@ cout<<"Call completed!"<<endl;
         }
  
 	if(!(gotmuplus && gotmuminus)) {n_dropped++; continue;}
+	if(Muon1_p4->DeltaR(*Muon2_p4)<0.4) {n_dropped++; continue;}
 
         Weight = getWeight(IntLuminosity, crossSection, genWeight, genEventSumw);
         Weight *= pu_correction->evaluate({N_pu_vertices, "nominal"}); 
@@ -283,7 +284,7 @@ cout<<"Call completed!"<<endl;
             	     tempEff= jet_pu->evaluate({Jet_eta[j],Jet_pt[j],"MCEff", "L"});
 		    }
             	}
-            bool passesPUID=(Jet_puId[j]==4 || Jet_puId[j]==6 ||Jet_puId[j]==7);
+            bool passesPUID=(Jet_puId[j]>=4);
             if(!(Jet_pt[j]>50 || passesPUID))	{t_weight*=(1-tempSF*tempEff)/(1-tempEff); }
             if((Jet_pt[j]>50 || passesPUID)) { 
              if(Jet_pt[j]<50) t_weight*=tempSF; //else you are in pT>50 case: apply no sf

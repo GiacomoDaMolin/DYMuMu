@@ -123,9 +123,11 @@ void DataAnalysis(string inputFile, string ofile)
         }
  
 	if(!(gotmuplus && gotmuminus)) {n_dropped++; continue;}
+	if(Muon1_p4->DeltaR(*Muon2_p4)<0.4) {n_dropped++; continue;}
+
 	int njet=0,nbjet=0;
         for (size_t j = 0; j < nJet; j++){
-	  bool passesPUID=(Jet_puId[j]==4 || Jet_puId[j]==6 ||Jet_puId[j]==7);
+	  bool passesPUID=(Jet_puId[j]>=4);
           if((abs(Jet_eta[j]) < 2.4) && Jet_pt[j]>25 && (Jet_jetId[j]==2 || Jet_jetId[j]==6) && (Jet_pt[j]>50 || passesPUID))  {
 		njet++;
            
