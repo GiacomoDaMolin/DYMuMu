@@ -14,14 +14,14 @@
         "N_events": 486770000
     },
     "DYm": {
-        "xs": 18610000,
+        "xs": 22635100,
         "signal": false,
         "dataset": "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
         "Sum_w": 1,
         "N_events": 1
     },
     "DYM": {
-        "xs":6077000 ,
+        "xs":6225400 ,
         "signal": false,
         "dataset": "/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
         "Sum_w": 1,
