@@ -129,7 +129,10 @@ void DataAnalysis(string inputFile, string ofile)
         for (size_t j = 0; j < nJet; j++){
 	  bool passesPUID=(Jet_puId[j]>=4);
           if((abs(Jet_eta[j]) < 2.4) && Jet_pt[j]>25 && (Jet_jetId[j]==2 || Jet_jetId[j]==6) && (Jet_pt[j]>50 || passesPUID))  {
-		njet++;
+	    TLorentzVector *MainBjet_p4 = new TLorentzVector();
+	    MainBjet_p4->SetPtEtaPhiM(Jet_pt[j], Jet_eta[j], Jet_phi[j], Jet_mass[j]);
+	    if((MainBjet_p4->DeltaR(*Muon1_p4)<0.4) || (MainBjet_p4->DeltaR(*Muon2_p4)<0.4)) {delete MainBjet_p4; continue;}
+	    else {delete MainBjet_p4; njet++;}
            
 	  }
         }

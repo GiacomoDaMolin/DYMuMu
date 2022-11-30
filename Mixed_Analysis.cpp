@@ -266,7 +266,7 @@ cout<<"Call completed!"<<endl;
 	vector<int> njet_in_collection, flavor;
 	vector<bool> tagged; 
 	double t_weight=1.;
-	int Njets=0;
+	int njet=0;
         for (size_t j = 0; j < nJet; j++)
         {
           if((abs(Jet_eta[j]) < 2.4) && Jet_pt[j]>25 && (Jet_jetId[j]==2 || Jet_jetId[j]==6)){
@@ -289,10 +289,14 @@ cout<<"Call completed!"<<endl;
             if((Jet_pt[j]>50 || passesPUID)) { 
              if(Jet_pt[j]<50) t_weight*=tempSF; //else you are in pT>50 case: apply no sf
              
+	     TLorentzVector *MainBjet_p4 = new TLorentzVector();
+	     MainBjet_p4->SetPtEtaPhiM(Jet_pt[j], Jet_eta[j], Jet_phi[j], Jet_mass[j]);
+	     if((MainBjet_p4->DeltaR(*Muon1_p4)<0.4) || (MainBjet_p4->DeltaR(*Muon2_p4)<0.4)) {delete MainBjet_p4; continue;}
+	     else {delete MainBjet_p4; njet++;}
              njet_in_collection.push_back(j);
              flavor.push_back(abs(Jet_hadronFlavour[j]));
              tagged.push_back((Jet_btagDeepFlavB[j] > jet_btag_deepFlav_wp));
-	     Njets++;
+	    
             
              if (Jet_btagDeepFlavB[j] > jet_btag_deepFlav_wp)  {one_Bjet = true;}
              }//passes PUID
@@ -335,7 +339,7 @@ cout<<"Call completed!"<<endl;
 
         dphi=Muon1_p4->DeltaPhi(*Muon2_p4);
 
-        h_NJets->Fill(Njets,Weight);
+        h_NJets->Fill(njet,Weight);
        
         muon1_pt = Muon1_p4->Pt();
         muon1_eta = Muon1_p4->Eta();
