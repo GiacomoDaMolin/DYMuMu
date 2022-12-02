@@ -127,6 +127,17 @@ cout<<"Call completed!"<<endl;
     tin->SetBranchAddress("Jet_jetId", &Jet_jetId);
     tin->SetBranchAddress("Jet_puId", &Jet_puId);
     tin->SetBranchAddress("Jet_hadronFlavour", &Jet_hadronFlavour);
+    //tauchecks
+    UInt_t nGenPart;
+    Int_t GenPart_pdgId[GEN_MAX_ARRAY_SIZE], GenPart_genPartIdxMother[GEN_MAX_ARRAY_SIZE];
+    if(Signal){	
+	    tin->SetBranchStatus("nGenPart", 1);
+	    tin->SetBranchAddress("nGenPart", &nGenPart);
+	    tin->SetBranchStatus("GenPart_pdgId",1);
+    	    tin->SetBranchAddress("GenPart_pdgId", &GenPart_pdgId);
+	    tin->SetBranchStatus("GenPart_genPartIdxMother", 1);
+    	    tin->SetBranchAddress("GenPart_genPartIdxMother", &GenPart_genPartIdxMother);
+	    }
 
     // pu stuff
     Float_t N_pu_vertices;
@@ -202,8 +213,31 @@ cout<<"Call completed!"<<endl;
 
     trun_out->Fill(); // we already called trun->GetEntry(0);
 
-    TRandom3* RndGen= new TRandom3();
 
+    bool From2Taus=false, FromTau=false;
+    TFile *foutT = new TFile(("Tau"+ofile).c_str(), "RECREATE");
+    TTree *toutT = new TTree("toutT", "toutT");
+    TTree *trun_outT = new TTree("Run_outT", "Run_outT");
+    if (Signal) {
+	toutT->Branch("dphi", &dphi);
+	toutT->Branch("invMass", &invMass);
+	toutT->Branch("muon2_eta", &muon2_eta);
+	toutT->Branch("muon2_pt", &muon2_pt);
+	toutT->Branch("muon1_eta", &muon1_eta);
+	toutT->Branch("muon1_pt", &muon1_pt);
+	toutT->Branch("Weight", &Weight);
+	toutT->Branch("FromTau", &FromTau);
+	toutT->Branch("From2Taus", &From2Taus);
+
+	trun_outT->Branch("genEventSumw", &genEventSumw);
+        trun_outT->Branch("IntLumi", &IntLuminosity);
+        trun_outT->Branch("xs", &crossSection);
+        trun_outT->Branch("nEv", &n_events);
+	trun_outT->Fill();
+	}
+
+    TRandom3* RndGen= new TRandom3();
+    fout->cd();
     #pragma omp parallel for
     for (UInt_t i = 0; i <nEv; i++)
     {
@@ -218,6 +252,7 @@ cout<<"Call completed!"<<endl;
         };
 
         bool gotmuplus=false,gotmuminus=false;
+	int mu1idx=-1, mu2idx=-1;
         for (UInt_t j = 0; j < nMuon; j++){
             if ((Muon_pt[j]>27.|| ((gotmuplus||gotmuminus) && Muon_pt[j]>25.)) && abs(Muon_eta[j])<2.4 && Muon_tightId[j] && Muon_pfRelIso04_all[j] < 0.15){
                 if (!gotmuplus && Muon_charge[j]==1){
@@ -230,7 +265,9 @@ cout<<"Call completed!"<<endl;
 				scmDT=rc.kSmearMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_nTrackerLayers[j],RndGen->Rndm());
 				}
 			Muon1_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+			if(!(gotmuplus||gotmuminus) && Muon1_p4->Pt()<26) {continue;}
 			gotmuplus=true;
+			mu1idx=j;
 			}
 		if (!gotmuminus && Muon_charge[j]==-1){
 			int NMCparticle=Muon_genPartIdx[j];
@@ -242,13 +279,24 @@ cout<<"Call completed!"<<endl;
 				scmDT=rc.kSmearMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_nTrackerLayers[j],RndGen->Rndm()); //TODO: Rndm may not be safe for stat application
 				}
 			Muon2_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+			if(!(gotmuplus||gotmuminus) && Muon2_p4->Pt()<26) {continue;}
 			gotmuminus=true;
+			mu2idx=j;
 			}
             }
         }
  
 	if(!(gotmuplus && gotmuminus)) {n_dropped++; continue;}
 	if(Muon1_p4->DeltaR(*Muon2_p4)<0.4) {n_dropped++; continue;}
+
+	if(Signal){
+		bool firstistau=isFromTau(nGenPart, GenPart_pdgId, GenPart_genPartIdxMother, Muon_genPartIdx[mu1idx]);
+		bool secondistau=isFromTau(nGenPart, GenPart_pdgId, GenPart_genPartIdxMother, Muon_genPartIdx[mu2idx]);
+		if (firstistau||secondistau){FromTau=true;}
+		else {FromTau=false;}
+		if (firstistau&&secondistau){From2Taus=true;}
+		else {From2Taus=false;}
+		}
 
         Weight = getWeight(IntLuminosity, crossSection, genWeight, genEventSumw);
         Weight *= pu_correction->evaluate({N_pu_vertices, "nominal"}); 
@@ -354,7 +402,8 @@ cout<<"Call completed!"<<endl;
 
         invMass = (*(Muon1_p4) + *(Muon2_p4)).M();
         h_Muon_Muon_invariant_mass->Fill(invMass,Weight);
-	tout->Fill();
+	if(Signal && FromTau) {toutT->Fill();}
+	else {tout->Fill();}
     }
 
 
@@ -367,6 +416,8 @@ cout<<"Call completed!"<<endl;
     std::cout << "Fraction of events removed by selections = " << (n_dropped * 1. / Rem_trigger) << endl;
     std::cout << "Final number of events "<< Rem_trigger - n_dropped<<endl;
 
+
+    fout->cd();
     tout->Write();
     trun_out->Write();
     // Write the histograms to the file
@@ -379,8 +430,13 @@ cout<<"Call completed!"<<endl;
     h_acopla_mumu->Write();
     h_NJets->Write();
 
-    fout->Write();
     fout->Close();
+    if (Signal) {
+	foutT->cd();
+	toutT->Write();
+	trun_outT->Write();
+	foutT->Close();
+	}
 }
 
 int main(int argc, char **argv)

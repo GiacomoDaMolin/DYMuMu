@@ -51,8 +51,9 @@ bool isFromTau(int size, Int_t *GenId, Int_t *GenParent, int initialID)
 		}
 		newID = GenParent[newID];
 		newPdg = GenId[newID];
+		//std::cout<< "PDG corrente "<< newPdg<<std::endl;
 		if (abs(newPdg) == 15)
-			return true;
+			{return true;}
 	}
 	return false;
 }

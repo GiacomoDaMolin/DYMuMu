@@ -112,11 +112,13 @@ void DataAnalysis(string inputFile, string ofile)
                 if (!gotmuplus && Muon_charge[j]==1){
 			double scmDT=rc.kScaleDT(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j]);
 			Muon1_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+			if(!(gotmuplus||gotmuminus) && Muon1_p4->Pt()<26) {continue;}
 			gotmuplus=true;
 			}
 		if (!gotmuminus && Muon_charge[j]==-1){
 			double scmDT=rc.kScaleDT(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j]);
 			Muon2_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+			if(!(gotmuplus||gotmuminus) && Muon2_p4->Pt()<26) {continue;}
 			gotmuminus=true;
 			}
             }
