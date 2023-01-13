@@ -254,35 +254,24 @@ cout<<"Call completed!"<<endl;
         bool gotmuplus=false,gotmuminus=false;
 	int mu1idx=-1, mu2idx=-1;
         for (UInt_t j = 0; j < nMuon; j++){
-            if ((Muon_pt[j]>27.|| ((gotmuplus||gotmuminus) && Muon_pt[j]>25.)) && abs(Muon_eta[j])<2.4 && Muon_tightId[j] && Muon_pfRelIso04_all[j] < 0.15){
-                if (!gotmuplus && Muon_charge[j]==1){
-			int NMCparticle=Muon_genPartIdx[j];
-			double scmDT;
-			if(NMCparticle>=0) {
-				scmDT=rc.kSpreadMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],GenPart_pt[NMCparticle]);
+            if (abs(Muon_eta[j])<2.4 && Muon_tightId[j] && Muon_pfRelIso04_all[j] < 0.15){
+		int NMCparticle=Muon_genPartIdx[j];
+		double scmDT;
+		if(NMCparticle>=0) {scmDT=rc.kSpreadMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],GenPart_pt[NMCparticle]);}
+		else {scmDT=rc.kSmearMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_nTrackerLayers[j],RndGen->Rndm());}
+		Muon_pt[j]*=scmDT;
+		if(Muon_pt[j]>27.|| ((gotmuplus||gotmuminus) && Muon_pt[j]>25.)){
+		        if (!gotmuplus && Muon_charge[j]==1){
+				Muon1_p4->SetPtEtaPhiM(Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+				gotmuplus=true;
+				mu1idx=j;
 				}
-			else {
-				scmDT=rc.kSmearMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_nTrackerLayers[j],RndGen->Rndm());
+			if (!gotmuminus && Muon_charge[j]==-1){
+				Muon2_p4->SetPtEtaPhiM(Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+				gotmuminus=true;
+				mu2idx=j;
 				}
-			Muon1_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
-			if(!(gotmuplus||gotmuminus) && Muon1_p4->Pt()<26) {continue;}
-			gotmuplus=true;
-			mu1idx=j;
-			}
-		if (!gotmuminus && Muon_charge[j]==-1){
-			int NMCparticle=Muon_genPartIdx[j];
-			double scmDT;
-			if(NMCparticle>=0) {
-				scmDT=rc.kSpreadMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],GenPart_pt[NMCparticle]);
-				}
-			else {
-				scmDT=rc.kSmearMC(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_nTrackerLayers[j],RndGen->Rndm()); //TODO: Rndm may not be safe for stat application
-				}
-			Muon2_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
-			if(!(gotmuplus||gotmuminus) && Muon2_p4->Pt()<26) {continue;}
-			gotmuminus=true;
-			mu2idx=j;
-			}
+		}
             }
         }
  

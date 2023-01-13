@@ -99,28 +99,26 @@ void DataAnalysis(string inputFile, string ofile)
     for (UInt_t i = 0; i < nEv; i++)
     {
         tin->GetEntry(i);
-        if (i % 100000 == 0)
-            std::cout << "Processing entry " << i << " of " << nEv << std::endl;
-        if (!(HLT_IsoMu24))
-        {
+        if (i % 100000 == 0) std::cout << "Processing entry " << i << " of " << nEv << std::endl;
+        if (!(HLT_IsoMu24)) {
             trigger_dropped++;
             continue;
-        };
+        }
 	bool gotmuplus=false,gotmuminus=false;
         for (UInt_t j = 0; j < nMuon; j++){
-            if (((Muon_pt[j]>27.||( (gotmuplus||gotmuminus) && Muon_pt[j]>25.)) && abs(Muon_eta[j])<2.4 && Muon_tightId[j] && Muon_pfRelIso04_all[j] < 0.15)){
-                if (!gotmuplus && Muon_charge[j]==1){
-			double scmDT=rc.kScaleDT(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j]);
-			Muon1_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
-			if(!(gotmuplus||gotmuminus) && Muon1_p4->Pt()<26) {continue;}
-			gotmuplus=true;
-			}
-		if (!gotmuminus && Muon_charge[j]==-1){
-			double scmDT=rc.kScaleDT(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j]);
-			Muon2_p4->SetPtEtaPhiM(Muon_pt[j]*scmDT,Muon_eta[j],Muon_phi[j],Muon_mass[j]);
-			if(!(gotmuplus||gotmuminus) && Muon2_p4->Pt()<26) {continue;}
-			gotmuminus=true;
-			}
+            if (( abs(Muon_eta[j])<2.4 && Muon_tightId[j] && Muon_pfRelIso04_all[j] < 0.15)){
+		double scmDT=rc.kScaleDT(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j]);
+		Muon_pt[j]*=scmDT;
+		if (Muon_pt[j]>27.||( (gotmuplus||gotmuminus) && Muon_pt[j]>25.)){
+		        if (!gotmuplus && Muon_charge[j]==1){
+				Muon1_p4->SetPtEtaPhiM(Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+				gotmuplus=true;
+				}
+			if (!gotmuminus && Muon_charge[j]==-1){
+				Muon2_p4->SetPtEtaPhiM(Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_mass[j]);
+				gotmuminus=true;
+				}
+		}
             }
         }
  
