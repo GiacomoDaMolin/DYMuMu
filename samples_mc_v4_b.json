@@ -1,0 +1,128 @@
+{
+    "TTLLorLTAUL": {
+        "xs": 88290,
+        "signal": true,
+        "dataset": "/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 10706355119.6116,
+        "N_events": 148470000
+    },
+    "TTSemileptonic": {
+        "xs": 365340,
+        "signal": false,
+        "dataset": "/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 146472193017.08405,
+        "N_events": 486770000
+    },
+    "TThad": {
+        "xs": 377960,
+        "signal": false,
+        "dataset": "/TTToHadronic_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 107993527547.176,
+        "N_events": 344028000
+    },
+    "DYm": {
+        "xs": 22635100,
+        "signal": false,
+        "dataset": "/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 1,
+        "N_events": 1
+    },
+    "DY0": {
+        "xs":4855699,
+        "signal": false,
+        "dataset": "/DYJetsToLL_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 1,
+        "N_events": 1
+    },
+    "DY1": {
+        "xs":905506 ,
+        "signal": false,
+        "dataset": "/DYJetsToLL_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 1,
+        "N_events": 1
+    },
+    "DY2": {
+        "xs":339109 ,
+        "signal": false,
+        "dataset": "/DYJetsToLL_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 1,
+        "N_events": 1
+    },
+    "W0j": {
+        "xs": 53330000,
+        "signal": false,
+        "dataset": "/WJetsToLNu_0J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 10600813925991.955,
+        "N_events": 177728297
+    },
+    "W1j": {
+        "xs": 8875000,
+        "signal": false,
+        "dataset": "/WJetsToLNu_1J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 8673173646261.08,
+        "N_events": 190471282
+    },
+    "W2j": {
+        "xs": 3338000,
+        "signal": false,
+        "dataset": "/WJetsToLNu_2J_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 2407273656615.9043,
+        "N_events": 98380466
+    },
+     "St": {
+        "xs": 35850,
+        "signal": false,
+        "dataset": "/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM",
+        "Sum_w": 400274110.3296001,
+        "N_events": 12336798
+    },
+    "Santit": {
+        "xs": 35850,
+        "signal": false,
+        "dataset": "/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM",
+        "Sum_w": 376234621.7050001,
+        "N_events": 11573849
+    },
+    "St_t": {
+        "xs": 136020,
+        "signal": false,
+        "dataset": "/ST_t-channel_top_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 400274110.3296001,
+        "N_events": 12336798
+    },
+    "Santit_t": {
+        "xs": 80950,
+        "signal": false,
+        "dataset": "/ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 376234621.7050001,
+        "N_events": 11573849
+    },
+   "St_s": {
+        "xs": 11240,
+        "signal": false,
+        "dataset": "/ST_s-channel_4f_leptonDecays_TuneCP5CR1_13TeV-amcatnlo-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM",
+        "Sum_w": 7,
+        "N_events": 7
+    },
+    "WW": {
+        "xs": 75800,
+        "signal": false,
+        "dataset": "/WW_TuneCP5_13TeV-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 15670122.115062367,
+        "N_events": 15670000
+    },
+    "ZW": {
+        "xs": 27600,
+        "signal": false,
+        "dataset": "/WZ_TuneCP5_13TeV-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 7986000.0,
+        "N_events": 7986000
+    },
+    "ZZ": {
+        "xs": 12140,
+        "signal": false,
+        "dataset": "/ZZ_TuneCP5_13TeV-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM",
+        "Sum_w": 3907000.0,
+        "N_events": 3907000
+    }
+}

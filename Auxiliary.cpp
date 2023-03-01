@@ -63,4 +63,37 @@ double InvertPhi(double phi){
  if (invphi>M_PI){invphi=invphi-2*M_PI;}
  return invphi;
 }
+
+
+void HistWrite(){
+h_Muon_Muon_invariant_mass->SetBinContent(h_Muon_Muon_invariant_mass->GetNbinsX(), h_Muon_Muon_invariant_mass->GetBinContent(h_Muon_Muon_invariant_mass->GetNbinsX()) + h_Muon_Muon_invariant_mass->GetBinContent(h_Muon_Muon_invariant_mass->GetNbinsX() + 1));
+h_Muon1_pt->SetBinContent(h_Muon1_pt->GetNbinsX(), h_Muon1_pt->GetBinContent(h_Muon1_pt->GetNbinsX()) + h_Muon1_pt->GetBinContent(h_Muon1_pt->GetNbinsX() + 1));
+h_Muon2_pt->SetBinContent(h_Muon2_pt->GetNbinsX(), h_Muon2_pt->GetBinContent(h_Muon2_pt->GetNbinsX()) + h_Muon2_pt->GetBinContent(h_Muon1_pt->GetNbinsX() + 1));
+    h_Muon1_eta->Write();
+    h_Muon1_pt->Write();
+    h_Muon2_eta->Write();
+    h_Muon2_pt->Write();
+
+    h_Muon_Muon_invariant_mass->Write();
+    h_acopla_mumu->Write();
+    h_NJets->Write();
+    h_mu_3dsig->Write();
+    h_mu_3d->Write();
+    h_mu_dxy->Write();
+}
+
+void HistPrep(){
+h_Muon1_pt->Sumw2();
+    h_Muon1_eta->Sumw2();
+    h_Muon2_pt->Sumw2();
+    h_Muon2_eta->Sumw2();
+    h_Muon_Muon_invariant_mass->Sumw2();    
+    h_leading_lepton_pt->Sumw2();
+    h_NJets->Sumw2();
+    h_acopla_mumu->Sumw2();
+    h_mu_3dsig->Sumw2();
+    h_mu_3d->Sumw2();
+    h_mu_dxy->Sumw2();
+   
+}
 #endif // Auxiliary_cpp

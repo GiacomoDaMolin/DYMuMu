@@ -53,13 +53,22 @@ void DataAnalysis(string inputFile, string ofile)
 
     Int_t Muon_charge[MAX_ARRAY_SIZE];
     Bool_t Muon_tightId[MAX_ARRAY_SIZE];
-    Float_t Muon_pfRelIso04_all[MAX_ARRAY_SIZE];
+    Float_t Muon_pfRelIso04_all[MAX_ARRAY_SIZE], Muon_dxy[MAX_ARRAY_SIZE], Muon_dz[MAX_ARRAY_SIZE], Muon_ip3d[MAX_ARRAY_SIZE], Muon_sip3d[MAX_ARRAY_SIZE];
     tin->SetBranchStatus("Muon_tightId", 1);
     tin->SetBranchStatus("Muon_charge", 1);
     tin->SetBranchStatus("Muon_pfRelIso04_all", 1);
     tin->SetBranchAddress("Muon_tightId", &Muon_tightId);
     tin->SetBranchAddress("Muon_charge", &Muon_charge);
     tin->SetBranchAddress("Muon_pfRelIso04_all", &Muon_pfRelIso04_all);
+
+    tin->SetBranchStatus("Muon_dxy", 1);
+    tin->SetBranchStatus("Muon_dz", 1);
+    tin->SetBranchStatus("Muon_ip3d", 1);
+    tin->SetBranchStatus("Muon_sip3d", 1);
+    tin->SetBranchAddress("Muon_dxy", &Muon_dxy);
+    tin->SetBranchAddress("Muon_dz", &Muon_dz);
+    tin->SetBranchAddress("Muon_ip3d", &Muon_ip3d);
+    tin->SetBranchAddress("Muon_sip3d", &Muon_sip3d);
 
     Float_t Jet_btagDeepFlavB[MAX_ARRAY_SIZE];
     UInt_t nJet;
@@ -105,6 +114,7 @@ void DataAnalysis(string inputFile, string ofile)
             continue;
         }
 	bool gotmuplus=false,gotmuminus=false;
+	int whichmuA=-1,whichmuB=-1;
         for (UInt_t j = 0; j < nMuon; j++){
             if (( abs(Muon_eta[j])<2.4 && Muon_tightId[j] && Muon_pfRelIso04_all[j] < 0.15)){
 		double scmDT=rc.kScaleDT(Muon_charge[j],Muon_pt[j],Muon_eta[j],Muon_phi[j]);
@@ -112,11 +122,11 @@ void DataAnalysis(string inputFile, string ofile)
 		if (Muon_pt[j]>27.||( (gotmuplus||gotmuminus) && Muon_pt[j]>25.)){
 		        if (!gotmuplus && Muon_charge[j]==1){
 				Muon1_p4->SetPtEtaPhiM(Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_mass[j]);
-				gotmuplus=true;
+				gotmuplus=true; whichmuA=j;
 				}
 			if (!gotmuminus && Muon_charge[j]==-1){
 				Muon2_p4->SetPtEtaPhiM(Muon_pt[j],Muon_eta[j],Muon_phi[j],Muon_mass[j]);
-				gotmuminus=true;
+				gotmuminus=true; whichmuB=j;
 				}
 		}
             }
@@ -155,6 +165,12 @@ void DataAnalysis(string inputFile, string ofile)
         h_acopla_mumu->Fill(M_PI-dphi);
         h_NJets->Fill(njet);
 
+	h_mu_3dsig->Fill(Muon_sip3d[whichmuA]);
+	h_mu_3d->Fill(Muon_ip3d[whichmuA]);
+	h_mu_dxy->Fill(abs(Muon_dxy[whichmuA]));
+	h_mu_3dsig->Fill(Muon_sip3d[whichmuB]);
+	h_mu_3d->Fill(Muon_ip3d[whichmuB]);
+	h_mu_dxy->Fill(abs(Muon_dxy[whichmuB]));
 
         invMass = (*(Muon1_p4) + *(Muon2_p4)).M();
         h_Muon_Muon_invariant_mass->Fill(invMass);
@@ -169,15 +185,7 @@ void DataAnalysis(string inputFile, string ofile)
     std::cout << "Fraction of events removed by selections = " << (n_dropped * 1. / Rem_trigger) << endl;
     std::cout << "Final number of events "<< Rem_trigger - n_dropped<<endl;
     // Write the histograms to the file
-    h_Muon1_eta->Write();
-    h_Muon1_pt->Write();
-    h_Muon2_eta->Write();
-    h_Muon2_pt->Write();
-
-    h_Muon_Muon_invariant_mass->Write();
-    h_acopla_mumu->Write();
-    h_NJets->Write();
-
+    HistWrite();
 
     fout->Write();
     fout->Close();
@@ -187,15 +195,7 @@ int main(int argc, char **argv)
 {
     string inputFile = argv[1];
     string outputFile = argv[2];
+    HistPrep();
 
-    h_Muon1_pt->Sumw2();
-    h_Muon1_eta->Sumw2();
-    h_Muon2_pt->Sumw2();
-    h_Muon2_eta->Sumw2();
-    h_Muon_Muon_invariant_mass->Sumw2();    
-    h_leading_lepton_pt->Sumw2();
-    h_NJets->Sumw2();
-    h_acopla_mumu->Sumw2();
-   
     DataAnalysis(inputFile, outputFile);
 }
