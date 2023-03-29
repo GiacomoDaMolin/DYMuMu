@@ -1,0 +1,1000 @@
+   18  hadd ST.root St.root St_*.root Santit.root Santit_t.root 
+   19  hadd TTMue.root Data.root TTLLorLTAUL.root TTbkg.root ST.root DY.root W.root Diboson.root 
+   20  voms
+   21  condor_q gdamolin
+   22  voms
+   23  condor_q gdamolin
+   24  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput/ -j /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/SamplesDTplusMC.json -r
+   25  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/te/All/ -o /eos/user/g/gdamolin/TT2taue/ -j /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/SamplesDTplusMC.json -r
+   26  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYMUMU/SUBDIR/ -o /eos/user/g/gdamolin/DYMUMU/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   27  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   28  condor_q gdamoli
+   29  condor_q gdamolin
+   30  voms
+   31  condor_q gdamolin
+   32  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/te/All/ -o /eos/user/g/gdamolin/TT2taue/ -j /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/SamplesDTplusMC.json -r
+   33  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYMUMU/SUBDIR/ -o /eos/user/g/gdamolin/DYMUMU/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   34  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   35  watch condor_q gdamolin
+   36  cdeos
+   37  cd DYTauMu/
+   38  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do hadd $dir.root $dir/*.root ; done
+   39  ll
+   40  root -l
+   41  cd Corr/
+   42  ll
+   43  hadd Data.root ../SingleMuon_?.root
+   44  hadd DY.root DY*.root
+   45  hadd W.root W?j.root
+   46  hadd Diboson.root WW.root ZW.root ZZ.root 
+   47  hadd TTbkg.root TTSemileptonic.root TThad.root 
+   48  hadd ST.root St.root St_?.root Santit*.root
+   49  hadd DYTauMu.root Data.root TTLLorLTAUL.root TTbkg.root ST.root DY.root W.root Diboson.root 
+   50  cp DYTauMu.root /afs/cern.ch/user/g/gdamolin/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+   51  cdeos
+   52  cd TTOutput/Corr/
+   53  ll
+   54  cp TTMue.root /afs/cern.ch/user/g/gdamolin/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+   55  SetCmsenv 
+   56  cdeos
+   57  cd DYMUMU/
+   58  ll
+   59  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do hadd $dir.root $dir/*.root ; done
+   60  root -l
+   61  hadd Corr/Data.root SingleMuon_?.root
+   62  cd Corr
+   63  ll
+   64  hadd Diboson.root WW.root ZW.root ZZ.root 
+   65  hadd W.root W0j.root W1j.root W2j.root 
+   66  hadd DY.root DY?.root
+   67  hadd TTbkg.root TTSemileptonic.root TThad.root 
+   68  hadd ST.root St.root St_?.root Santit*.root
+   69  hadd DYMuMu.root Data.root TTLLorLTAUL.root TTbkg.root ST.root DY.root W.root Diboson.root
+   70  cp DYMuMu.root /afs/cern.ch/user/g/gdamolin/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+   71  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/te/All/ -o /eos/user/g/gdamolin/TT2taue/ -j /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/SamplesDTplusMC.json -r
+   72  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   73  watch condor_q gdamolin
+   74  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   75  python3 ~/Johan/TTbar/Python_Analysis/rescue.py -s /afs/cern.ch/user/g/gdamolin/DYMUMU/SUBDIR/ -o /eos/user/g/gdamolin/DYMUMU/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -r
+   76  cdeos
+   77  SetCmsenv 
+   78  cd TT2taue/
+   79  ll
+   80  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do hadd $dir.root $dir/*.root ; done
+   81  root -l
+   82  hadd Corr/Data.root EGamma_*.root
+   83  cd Corr
+   84  ll
+   85  hadd DY.root DY*.root
+   86  hadd W.root W*j.root
+   87  hadd Diboson.root WW.root ZW.root ZZ.root 
+   88  hadd ST.root St.root St_?.root Santit*.root
+   89  hadd TTbkg.root TTSemileptonic.root TThad.root 
+   90  hadd TTTauE.root Data.root TTLLorLTAUL.root TTbkg.root ST.root DY.root W.root Diboson.root 
+   91  cp TTTauE.root /afs/cern.ch/user/g/gdamolin/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+   92  cd ~
+   93  ll
+   94  cd ttGammaEx/
+   95  ll
+   96  cd ..
+   97  cd ttGammaEx/
+   98  ll
+   99  rm -r TTGamma_LongExercise/
+  100  y
+  101  cd ..
+  102  ll
+  103  cd cra
+  104  cd crab
+  105  ll
+  106  cd ..
+  107  ll
+  108  rm -r crab/
+  109  cd Experimental/
+  110  ll
+  111  cd ..
+  112  rm -r Experimental/
+  113  ll
+  114  cd jobs_subm/
+  115  ll
+  116  cd ..
+  117  rm -r jobs_subm/
+  118  y
+  119  rm -r jobs_subm/
+  120  y
+  121  rm -r jobs_subm/
+  122  ll
+  123  cd Johan/
+  124  ll
+  125  cd error/
+  126  ll
+  127  rm *
+  128  cd ../log/
+  129  ll
+  130  rm *
+  131  cd ../output/
+  132  ll
+  133  rm *
+  134  ll
+  135  cd ..
+  136  ll
+  137  rm -r error log/ output/
+  138  ll
+  139  cd Temp/
+  140  ll
+  141  cd --
+  142  cd ~/Johan/
+  143  ll
+  144  rm -r Temp/
+  145  ll
+  146  cd MC/
+  147  ll
+  148  rm *.root
+  149  cd ..
+  150  ll
+  151  cd ..
+  152  cd DYMUMU/
+  153  ll
+  154  rm  -r noveto/
+  155  exit
+  156  SetCmsenv 
+  157  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+  158  ll
+  159  pwd
+  160  ll
+  161  root -l TTMue.root 
+  162  cd CMSSW_12_4_1_patch1//src/HiggsAnalysis/CombinedLimit/data/tutorials/longexercise/
+  163  ll
+  164  gedit datacard_part3*.txt &
+  165  root -l datacard_part3.shapes.root
+  166  voms
+  167  SetCmsenv 
+  168  cd ~/CMSSW_12_4_1_patch1/
+  169  cd src/HiggsAnalysis/CombinedLimit
+  170  cd ..
+  171  ll
+  172  cd CombinedLimit/
+  173  ll
+  174  cd ..
+  175  ll
+  176  cd ..
+  177  ll
+  178  cd HiggsAnalysis/
+  179  ll
+  180  cd COm
+  181  cd CombinedLimit/
+  182  ll
+  183  cdeos
+  184  cd TTOutput/Corr/
+  185  ll
+  186  root -l TTMue.root
+  187  ll
+  188  cd ~
+  189  ll -rt
+  190  cd CMSSW_12_4_1_patch1/
+  191  ll
+  192  cd tmp
+  193  cd ..
+  194  history | grep find
+  195  find ./ -type f TTMuE.root
+  196  find -type f TTMuE.root
+  197  find *.root-type f
+  198  find *.root -type f
+  199  find -name TTMue.root
+  200  gedit where.txt &
+  201  cd /src/HiggsAnalysis/CombinedLimit/data/LFU/
+  202  cd src/HiggsAnalysis/CombinedLimit/data/LFU/
+  203  ll
+  204  pwd
+  205  cd /afs/cern.ch/user/g/gdamolin/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data
+  206  ll
+  207  cd tutorials/
+  208  ll
+  209  cd shapes/
+  210  ll
+  211  gedit *.txt &
+  212  root -l simple-shapes-TH1_input.root 
+  213  xssimple-shapes-TH1_input.root.
+  214  cd ..
+  215  ll
+  216  cd longexercise/
+  217  ll
+  218  vim datacard_part3_nocrs.txt 
+  219  cd  ../..
+  220  cd LFU/
+  221  òò
+  222  ll
+  223  gedit datacardTTMU.txt &
+  224  combine -M AsymptoticLimits --run blind datacardTTMU.txt -n.testm -v 1
+  225  gedit datacardTTMU.txt &
+  226  combine -M AsymptoticLimits --run blind datacardTTMU.txt -n.testm -v 1
+  227  voms
+  228  SetCmsenv 
+  229  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  230  ll
+  231  gedit datacardTTMU.txt &
+  232  history | grep Combine
+  233  history | grep combine
+  234  combine -M AsymptoticLimits --run blind datacardTTMU.txt -n.testm -v 1
+  235  combine -M AsymptoticLimits --run blind datacardTTMU.txt -n.testm -v 1 --keyword-value TEMP=_$SYSTEMATICS
+  236  mmm
+  237  SetCmsenv 
+  238  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  239  ll
+  240  gedit olddatacard.txt &
+  241  combine -M AsymptoticLimits --run blind olddatacard.txt -n.testm -v 1 --keyword-value TEMP=_$SYSTEMATICS
+  242  combine -M AsymptoticLimits --run blind olddatacard.txt -n.testm -v 1
+  243  ll -rt
+  244  root -l higgsCombine.testm.AsymptoticLimits.mH120.root
+  245  combine -M AsymptoticLimits --run blind olddatacard.txt -n.testm -v 1
+  246  ll -rt
+  247  rm higgsCombine.testm.AsymptoticLimits.mH120.TEMP_.root 
+  248  root -l higgsCombine.testm.AsymptoticLimits.mH120.root
+  249  combine -M AsymptoticLimits --run blind olddatacard.txt -n.testm -v 1
+  250  combine --LHCmode LHC-limits --run blind olddatacard.txt -n.testm -v 1
+  251  combine -M HybridNew --LHCmode LHC-limits --run blind olddatacard.txt -n.testm -v 1
+  252  combine -M AsymptoticLimits --run blind olddatacard.txt -n.testm -v 1
+  253  ll
+  254  root -l TTTauE.root
+  255  ll
+  256  root -l DYTauMu.root
+  257  ll
+  258  root -l DYMuMu.root
+  259  ll
+  260  root -l higgsCombine.testm.AsymptoticLimits.mH120.root
+  261  combine -M MultiDimFit --algo singles --cl=0.68 --run blind olddatacard.txt -n.testm -v 1
+  262  combine -M MultiDimFit --algo singles --cl=0.68 -t -1 olddatacard.txt -n.testm -v 1
+  263  combine -M MultiDimFit --algo grid --points=100 -t -1 olddatacard.txt -n.testm -v 1
+  264  ll -rt
+  265  root -l higgsCombine.testm.MultiDimFit.mH120.root
+  266  ll
+  267  combine -M FitDiagnostics -t -1 olddatacard.txt -n.testm -v 1
+  268  combine -M FitDiagnostics olddatacard.txt -n _fit_result --saveShapes --saveWithUncertainties
+  269  combine -M FitDiagnostics olddatacard.txt -n _fit_result --saveShapes --saveWithUncertainties -t -1
+  270  combine -M FitDiagnostics olddatacard.txt -n _fit_result --saveShapes --saveWithUncertainties -t -1 -S
+  271  combine --help
+  272  combine -M FitDiagnostics olddatacard.txt -n _fit_result --saveShapes --saveWithUncertainties -t -1 -freezeParameters allConstrainedNuisances
+  273  combine -M FitDiagnostics olddatacard.txt -n _fit_result --saveShapes --saveWithUncertainties -t -1 --freezeParameters allConstrainedNuisances
+  274  combine -M FitDiagnostics olddatacard.txt -n _fit_result --saveShapes --saveWithUncertainties -t -1 --expectSignal 1
+  275  combine -M MultiDimFit --algo grid --points=100 -t -1 olddatacard.txt -n.testm -v 1 --expectSignal 1
+  276  ll -rt
+  277  root -l higgsCombine.testm.MultiDimFit.mH120.root
+  278  combine -M MultiDimFit --algo grid --points=100 -t -1 olddatacard.txt -n.testm -v 1 --expectSignal 5
+  279  root -l higgsCombine.testm.MultiDimFit.mH120.root
+  280  combine -M MultiDimFit --algo singles --cl=0.68 -t 10 olddatacard.txt -n.testm -v 1 --ExpectSignal 1
+  281  combine -M MultiDimFit --algo singles --cl=0.68 -t 10 olddatacard.txt -n.testm -v 1 --expectSignal 1
+  282  ll -rt
+  283  root -l higgsCombine.testm.MultiDimFit.mH120.123456.root
+  284  ll
+  285  combine -M MultiDimFit --algo singles --cl=0.68 -t 1 olddatacard.txt -n.testm -v 1 --ExpectSignal 1
+  286  combine -M MultiDimFit --algo singles --cl=0.68 -t -1 olddatacard.txt -n.testm -v 1 --ExpectSignal 1
+  287  combine -M MultiDimFit --algo singles --cl=0.68 -t -1 olddatacard.txt -n.testm -v 1 --expectSignal 1
+  288  combine -M MultiDimFit --algo grid --points 1000 -t -1 olddatacard.txt -n.testm -v 1 --expectSignal 1 --setParameterRanges r=0.8,1.2:rateDY=0.5,1.5 -P r -P rateDY
+  289  ll
+  290  ll -rt
+  291  root -l higgsCombine.testm.MultiDimFit.mH120.root
+  292  combine -M MultiDimFit --algo grid --points 2000 -t -1 olddatacard.txt -n.testm -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  293  root -l higgsCombine.testm.MultiDimFit.mH120.root
+  294  combineCards.py --help
+  295  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt MuEplusDYMu.txt
+  296  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt > MuEplusDYMu.txt
+  297  vim MuEplusDYMu.txt
+  298  combine -M MultiDimFit --algo grid --points 2000 -t -1 MuEplusDYMu.txt -n.testm -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  299  combineCards.py --help
+  300  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt -a  > MuEplusDYMu2.txt
+  301  combine -M MultiDimFit --algo grid --points 2000 -t -1 MuEplusDYMu2.txt -n.testm -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  302  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt -a  > MuEplusDYMu2.txt
+  303  combine -M MultiDimFit --algo grid --points 2000 -t -1 MuEplusDYMu2.txt -n.testm -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  304  ll -rt
+  305  root -l higgsCombine.testm.MultiDimFit.mH120.root
+  306  history | grep Combine
+  307  history | grep combine
+  308  SetCmsenv
+  309  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/tutorials/
+  310  ll
+  311  cd longexercise/
+  312  ll
+  313  gedit datacard_part3*.txt &
+  314  root -l datacard_part3_DY_cr.shapes.root 
+  315  SetCmsenv 
+  316  voms
+  317  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/src/
+  318  ll
+  319  cd ..
+  320  ll
+  321  cd data/
+  322  ll
+  323  cd LFU
+  324  òò
+  325  ll
+  326  gedit *.txt &
+  327  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt TE=datacardTTTau.txt DYT=datacardDYTau.txt -a  > IwantAll.txt
+  328  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  329  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt TE=datacardTTTau.txt DYT=datacardDYTau.txt -a  > IwantAll.txt
+  330  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  331  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt TE=datacardTTTau.txt DYT=datacardDYTau.txt -a  > IwantAll.txt
+  332  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  333  combineCards.py DY=datacardDYMu.txt SR=olddatacard.txt TE=datacardTTTau.txt DYT=datacardDYTau.txt -a  > IwantAll.txt
+  334  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  335  ll -rt
+  336  root -l higgsCombine.All.MultiDimFit.mH120.root
+  337  combine -M MultiDimFit --algo grid --points 3000 -t 10 IwantAll.txt -n.2All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.8,1.2 -P r -P rateDY
+  338  ll -rt
+  339  root -l higgsCombine.2All.MultiDimFit.mH120.123456.root
+  340  ll
+  341  ll *rt
+  342  ll -rt
+  343  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.3All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --fitNuisances=1
+  344  combine --help
+  345  combine -M FitDiagnostics --forceRecreateNLL -t -1 -n BpS --expectSignal 1 IwantAll.txt 
+  346  combine -M FitDiagnostics --forceRecreateNLL -t -1 -n BpS --expectSignal 1 IwantAll.txt --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --fitNuisances=1
+  347  combine -M FitDiagnostics --forceRecreateNLL -t -1 -n BpS --expectSignal 1 IwantAll.txt --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY
+  348  combineTool.py -M Impacts -d IwantAll.txt -expectSignal 1 -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1
+  349  ./src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.txt -expectSignal 1 -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1
+  350  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.txt -expectSignal 1 -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1
+  351  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.txt -expectSignal 1 -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  352  text2workspace.py IwantAll.txt -m 125
+  353  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -expectSignal 1 -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  354  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  355  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 --run blind
+  356  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 -t -1
+  357  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.5,1.5:rateDY=0.5,1.5 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 -t -1
+  358  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.5,2:rateDY=0.5,2 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 -t -1
+  359  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.5,2:rateDY=0.5,2 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  360  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.5,2:rateDY=0.5,2 -P r -P rateDY --doFits --robustFit 1 -m 125
+  361  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d IwantAll.root -n .impacts --setParameterRanges r=0.5,2:rateDY=0.5,2 -P r -P rateDY --doFits -m 125 -o impacts_part3.json
+  362  ll ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts
+  363  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py impacts_part3.json -o test
+  364  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i impacts_part3.json -o test
+  365  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i impacts_part3.json -o test --POI r
+  366  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i impacts_part3.json -o test --blind
+  367  ll -rt
+  368  root -l higgsCombine_paramFit_.impacts_Ele_IdIso.MultiDimFit.mH125.root
+  369  history > Hist.txt
+  370  gedit Hist.txt &
+  371  text2workspace.py MuEplusDYMu2.txt -m 125
+  372  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -expectSignal 1 -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  373  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  374  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 --blind
+  375  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 --help
+  376  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125 --run blind
+  377  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doInitialFit --robustFit 1 -m 125
+  378  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --doFits --robustFit 1 -m 125
+  379  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --robustFit 1 -m 125 kayak.json
+  380  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i kayak.json -o canoa
+  381  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d MuEplusDYMu2.root -n .impacts --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY -m 125 kayak.json
+  382  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i kayak.json -o canoa
+  383  ll -rt
+  384  root -l higgsCombine_paramFit_.impacts_Ele_IdIso.MultiDimFit.mH125.root
+  385  history | grep combine
+  386  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.2,1.8 -P r -P rateDY
+  387  cdeos
+  388  ll
+  389  cd TTOutput/
+  390  ll
+  391  cd Corr/
+  392  ll
+  393  root -l Data.root 
+  394  root -l TTLLorLTAUL.root 
+  395  cd ~
+  396  ll
+  397  cd public/
+  398  ll
+  399  root -l Riccardo_egammaTriggerEfficiency_2018_20200422.root
+  400  cd ~/CMSSW_12_4_1_patch1/
+  401  ll
+  402  find combineTool.py
+  403  find -f combineTool.py
+  404  history | grep combineTool.py
+  405  cd src/
+  406  òò
+  407  ll
+  408  cd CombineHarvester/
+  409  ll
+  410  cd CombineTools/
+  411  ll
+  412  ll src
+  413  ll macros/
+  414  cd ~/CMSSW_12_4_1_patch1/
+  415  find . -name combineTool.py
+  416  cd ~/public
+  417  cd public/ll
+  418  cd public/
+  419  ll
+  420  root -l Riccardo_egammaTriggerEfficiency_2018_20200422.root
+  421  history
+  422  find -f NewImpacts.json
+  423  find . -f NewImpacts.json
+  424  find . NewImpacts.json
+  425  cd ../CMSSW_12_4_1_patch1/
+  426  find . NewImpacts.json
+  427  find . ABCD.json
+  428  cd ~/public
+  429  ll
+  430  find . hotjets
+  431  find . hotjets-UL18.root
+  432  pwd
+  433  ll
+  434  root -l hotjets-UL18.root
+  435  voms
+  436  SetCmsenv 
+  437  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  438  ll
+  439  gedit *.txt &
+  440  rm datacardTTMU.txt 
+  441  mv olddatacard.txt datacardTTMU.txt
+  442  gedit datacard*.txt &
+  443  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel
+  444  combine  --h
+  445  combine  --hintMethod PO
+  446  combine  --help
+  447  vim Hist.txt 
+  448  combineCards.py TTM=datacardTTMU.txt TTT=datacardTTTau.txt DYM=datacardDYMu.txt DYT=datacardDYTau.txt > datacard.txt
+  449  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel
+  450  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=Muon_pt1/TT2LL:r_1[1,0.5,1.5]' --PO 'map=Muon_pt/DY:rateDYM[1,0.5,1.5]' --PO 'map=Tau_pt/DY:rateDYT[1,0.5,1.5]' --PO 'map=Tau_pt1/TT2LL:r_4=expr;;r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  451  combine -M MultiDimFit --algo grid --points 3000 -t -1 -d datacard.root -n.R -v 1 --expectSignal 1
+  452  ll -rt
+  453  root -l higgsCombine.R.MultiDimFit.mH120.root
+  454  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=Muon_pt1/TT2LL:r_1[1,0.5,1.5]' --PO 'map=Muon_pt/DY:rateDYM[1,0.5,1.5]' --PO 'map=Tau_pt/DY:rateDYT[1,0.5,1.5]' --PO 'map=Tau_pt1/TT2LL:r_4=expr::r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  455  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=Muon_pt1/TT2LL:r_1[1,0.7,1.3]' --PO 'map=Muon_pt/DY:rateDYM[1,0.8,1.2]' --PO 'map=Tau_pt/DY:rateDYT[1,0.8,1.2]' --PO 'map=Tau_pt1/TT2LL:r_4=expr::r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  456  combine -M MultiDimFit --algo grid --points 3000 -t -1 -d datacard.root -n.RRRR -v 1 --expectSignal 1
+  457  root -l higgsCombine.RRRR.MultiDimFit.mH120.root
+  458  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=Muon_pt1/TT2LL:r_1[1,0.9,1.1]' --PO 'map=Muon_pt/DY:rateDYM[1,0.95,1.05]' --PO 'map=Tau_pt/DY:rateDYT[1,0.9,1.1]' --PO 'map=Tau_pt1/TT2LL:r_4=expr::r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  459  combine -M MultiDimFit --algo grid --points 6000 -t -1 -d datacard.root -n.Conf -v 1 --expectSignal 1
+  460  ll -rt
+  461  root -l higgsCombine.Conf.MultiDimFit.mH120.root
+  462  ll
+  463  history | grep combineTool
+  464  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.txt --doInitialFit --robustFit 1 -t -1
+  465  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.txt --doInitialFit --robustFit 1 -t -1 -m 120
+  466  text2workspace.py htt_tt.txt -m 125
+  467  text2workspace.py datacardDYMu.txt -m 125
+  468  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1
+  469  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1 -m 125
+  470  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1 -m 125 ---expectSignal 1
+  471  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1 -m 125 --expectSignal 1
+  472  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --robustFit 1 -t -1 -m 125 --expectSignal 1 --doFits
+  473  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root  -t -1 -m 125 --expectSignal 1 impacts.json
+  474  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i impacts.json -o impacts
+  475  ll -rt
+  476  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root  -t -1 -m 125 --expectSignal 1 impacts.json
+  477  text2workspace.py datacardTTMU.txt -m 125
+  478  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardTTMU.root --doInitialFit --robustFit 1 -t -1 -m 125
+  479  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardTTMU.root --doInitialFit --robustFit 1 -t -1 -m 125 --expectSignal 1
+  480  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardTTMU.root --robustFit 1 -t -1 -m 125 --expectSignal 1 --doFits
+  481  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardTTMU.root  -m 125 --expectSignal 1 NewImpacts.json
+  482  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i NewImpacts.json -o Grrrr
+  483  ll -rt
+  484  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardTTMU.root  -m 125  ABCD.json
+  485  ll -rt
+  486  vim ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py
+  487  gedit combine_logger.out 
+  488  ll *.json
+  489  history | grep impacts_part3.json
+  490  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardTTMU.root ABCD.json --blind -m 125
+  491  SetCmsenv 
+  492  ll
+  493  cd ~/Johan/TTbar/ExperimentalSystematics/
+  494  ll
+  495  gedit  *.json
+  496  ll
+  497  gedit Analizer.cc &
+  498  history | grep c++
+  499  history | grep g++
+  500  history | grep test.exe
+  501  history
+  502  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  503  SetCmsenv 
+  504  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  505  ll -rt
+  506  combine -M MultiDimFit --algo grid --points 3000 -t -1 -d datacard.root
+  507  combine -M MultiDimFit --algo grid --points 3000 -t -1 -d datacard.root -n.EA -v 1 --expectSignal 1  -P r_ratio --floatOtherPOIs=1
+  508  ll -rt
+  509  root -l higgsCombine.EA.MultiDimFit.mH120.root
+  510  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 --expectSignal 1 -P r_1 -P r_ratio 
+  511  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=Muon_pt1/TT2LL:r_1[1,0.5,1.5]' --PO 'map=Muon_pt/DY:rateDYM[1,0.5,1.5]' --PO 'map=Tau_pt/DY:rateDYT[1,0.5,1.5]' --PO 'map=Tau_pt1/TT2LL:r_4=expr;;r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  512  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 --expectSignal 1 -P r_1 -P r_ratio 
+  513  combine -M MultiDimFit --algo grid --points 3000 -t -1 -d datacard.root -n.EA -v 1 --expectSignal 1  -P r_ratio --floatOtherPOIs=1
+  514  root -l higgsCombine.EA.MultiDimFit.mH120.root
+  515  vim Hist.txt 
+  516  gedit Hist.txt &
+  517  ll -rt
+  518  history > RecentHist.txt
+  519  gedit RecentHist.txt &
+  520  gedit datacard*.txt &
+  521  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=Muon_pt1/TT2LL:r_1[1,0.5,1.5]' --PO 'map=Muon_pt/DY:rateDYM[1,0.5,1.5]' --PO 'map=Tau_pt/DY:rateDYT[1,0.5,1.5]' --PO 'map=Tau_pt1/TT2LL:r_4=expr;;r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  522  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 --expectSignal 1 -P r_1 -P r_ratio 
+  523  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -- -P rateDYM -P rateDYT
+  524  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P rateDYM -P rateDYT
+  525  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P r_1 -P r_ratio --setParameters r_1=1,r_ratio=2
+  526  ll
+  527  rm datacard.root 
+  528  history | grep combineCards.py
+  529  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel --PO 'map=TTM/TT2LL:r_1[1,0.5,1.5]' --PO 'map=DYM/DY:rateDYM[1,0.5,1.5]' --PO 'map=DYT/DY:rateDYT[1,0.5,1.5]' --PO 'map=TTT/TT2LL:r_4=expr;;r_4("(@0/@1)*(@2/@3)",r_1,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  530  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P r_1 -P r_ratio --setParameters r_1=1,r_ratio=2
+  531  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P r_1 -P r_ratio --setParameters r_1=1,r_ratio=2 --floatOtherPOIs
+  532  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P r_1 -P r_ratio --setParameters r_1=1,r_ratio=2 --floatOtherPOIs 1
+  533  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel  --PO 'map=DYM/DY:rateDYM[1,0.5,1.5]' --PO 'map=DYT/DY:rateDYT[1,0.5,1.5]' --PO 'map=TTT/TT2LL:r_4[1,0.5,1.5]' --PO 'map=TTM/TT2LL:r_1=expr;;r_1("(@0/@1)*(@2/@3)",r_4,r_ratio[2,0.5,3.5],rateDYM,rateDYT)'
+  534  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P r_1 -P r_ratio --floatOtherPOIs 1
+  535  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.Name -v 1 -P r_ratio --floatOtherPOIs 1
+  536  history >Memo.txt
+  537  history
+  538  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.txt --doInitialFit --robustFit 1 -t -1
+  539  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.txt --doInitialFit --robustFit 1 -t -1 -m 120
+  540  vim datacardDYMu.txt
+  541  ll -rt
+  542  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1 -m 120
+  543  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1 -m 120 -expectSignal 1
+  544  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --doInitialFit --robustFit 1 -t -1 -m 120 --expectSignal 1
+  545  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --robustFit 1 -t -1 -m 120 --expectSignal 1 --doFits
+  546  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M Impacts -d datacardDYMu.root --robustFit 1 -t -1 -m 120 --expectSignal 1 -o IMPACTS.json
+  547  plotImpacts.py -i IMPACTS.json -o Rmpacts
+  548  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/plotImpacts.py -i IMPACTS.json -o Rmpacts
+  549  ll
+  550  ll -rt
+  551  evince Rmpacts.pdf &
+  552  gedit Hist.txt &
+  553  gedit Memo.txt &
+  554  history >Memo2.txt
+  555  gedit Memo2.txt &
+  556  history | grep combineCards.py
+  557  combineCards.py TTM=datacardTTMU.txt TTT=datacardTTTau.txt DYM=datacardDYMu.txt DYT=datacardDYTau.txt > datacard.txt
+  558  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel  --PO 'map=DYM/DY:rateDYM[1,0.5,1.5]' --PO 'map=DYT/DY:rateDYT[1,0.5,1.5]' --PO 'map=TTT/TT2LL:r_4[1,0.5,1.5]' --PO 'map=TTM/TT2LL:r_1=expr;;r_1("(@0/@1)*(@2/@3)",r_4,r_ratio[20,12,28],rateDYM,rateDYT)'
+  559  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1
+  560  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel  --PO 'map=DYM/DY:rateDYM[1,0.5,1.5]' --PO 'map=DYT/DY:rateDYT[1,0.5,1.5]' --PO 'map=TTT/TT2LL:r_4[1,0.5,1.5]' --PO 'map=TTM/TT2LL:r_1=expr;;r_1("(@0/@1)*(@2/@3)",r_4,r_ratio[20,1,40],rateDYM,rateDYT)'
+  561  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1
+  562  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1 --setParameters r_ratio=20
+  563  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1 --setParameters r_ratio=18
+  564  text2workspace.py datacard.txt -o datacard.root -P HiggsAnalysis.CombinedLimit.PhysicsModel:multiSignalModel  --PO 'map=DYM/DY:rateDYM[1,0.5,1.5]' --PO 'map=DYT/DY:rateDYT[1,0.5,1.5]' --PO 'map=TTT/TT2LL:r_4[1,0.5,1.5]' --PO 'map=TTM/TT2LL:r_1=expr;;r_1("(@0/@1)*(@2/@3)",r_4,r_ratio[20,0.1,40],rateDYM,rateDYT)'
+  565  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1 --setParameters r_ratio=18
+  566  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1
+  567  combine -M MultiDimFit --algo singles -t -1 -d datacard.root -n.MAybe -v 1 -P r_ratio --floatOtherPOIs 1 --setParameters r_ratio=18
+  568  ll -rt
+  569  root -l higgsCombine.MAybe.MultiDimFit.mH120.root
+  570  voms
+  571  SetCmsenv 
+  572  cd ~/Johan/TTbar/ExperimentalSystematics/
+  573  ./test.exe /eos/user/g/gdamolin/Examples/TT2LL/10671CD1-1127-0842-AE7F-AF20DA985C45.root Vest.root  82000 59 false true TTLL
+  574  gedit Analizer.cc &
+  575  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  576  ./test.exe /eos/user/g/gdamolin/Examples/TT2LL/10671CD1-1127-0842-AE7F-AF20DA985C45.root Vest.root  82000 59 false true TTLL
+  577  ./test.exe /eos/user/g/gdamolin/Examples/EgammaData/00B7FFB1-3455-C941-AE3B-CF7085966A41.root  dt.root  82000 59 false false data
+  578  ./test.exe /eos/user/g/gdamolin/Examples/EgammaData/00B7FFB1-3455-C941-AE3B-CF7085966A41.root dt.root  82000 59 false false data
+  579  ./test.exe /eos/user/g/gdamolin/Examples/EgammaData/00B7FFB1-3455-C941-AE3B-CF7085966A41.root dt.root 82000 59 false false data
+  580  ./test.exe /eos/user/g/gdamolin/Examples/EgammaData/00B7FFB1-3455-C941-AE3B-CF7085966A41.root dt.root 82000 59 true false data
+  581  ll
+  582  root -l dt.root
+  583  ll
+  584  rm *.root
+  585  python3 submit_dag_ROOT.py -i /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput/ -j /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/SamplesDTplusMC.json -e /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/run.sh -pr /afs/cern.ch/user/g/gdamolin/private/x509up_u151129
+  586  cd ~/Johan/TTMue/
+  587  ll
+  588  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do condor_submit_dag $dir/$dir.dag ; done
+  589  watch condor_q gdamolin
+  590  cd ~/Johan/TTbar/ExperimentalSystematics/
+  591  ll
+  592  cd ../Python_Analysis/
+  593  ll
+  594  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+  595  watch condor_q gdamolin
+  596  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+  597  watch condor_q gdamolin
+  598  cdeos
+  599  cd Examples/EgammaData/
+  600  ll
+  601  pwd
+  602  cdeos
+  603  cd TTOutput/
+  604  ll
+  605  rm *.root
+  606  ll
+  607  cd Corr/
+  608  ll
+  609  mkdir SYSTS0
+  610  mv TTMue.root SYSTS0/
+  611  rm *.root
+  612  cd ,,
+  613  ll
+  614  cd ..
+  615  ll
+  616  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.root ; done
+  617  ll EGamma_A
+  618  cd ~/Johan/
+  619  ll
+  620  cd TTMue/
+  621  ll
+  622  ll WW
+  623  ll
+  624  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.* ; done
+  625  ll
+  626  cd EGamma_A
+  627  òò
+  628  ll
+  629  cd err
+  630  ll
+  631  cd ../out/
+  632  ll
+  633  vim 852418.0.out
+  634  voms
+  635  SetCmsenv 
+  636  cd ~/Johan/TTbar/Python_Analysis/
+  637  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+  638  cdeos
+  639  cd  TTOutput/
+  640  ll
+  641  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do hadd $dir.root $dir/*.root ; done
+  642  root -l
+  643  cd Corr/
+  644  ll
+  645  hadd ../EGamma_*.root Data.root
+  646  ll ..
+  647  hadd ../EGamma_*.root Data.root
+  648  hadd Data.root ../EGamma_*.root
+  649  ll
+  650  hadd W.root
+  651  hadd W.root W?j.root
+  652  hadd TTbkg.root TTSemileptonic.root TThad.root 
+  653  hadd Diboson.root WW.root ZW.root ZZ.root 
+  654  hadd DY.root DY*.root
+  655  hadd ST.root St.root St_?.root Santit.root Santit_t.root 
+  656  ll
+  657  root -l
+  658  ll *.cc
+  659  root -l
+  660  ll
+  661  ll -rt
+  662  cd SYSTS0/
+  663  ll
+  664  root -l TTMue.root
+  665  cd ..
+  666  ll
+  667  gedit New.cc &
+  668  root -l New.cc 
+  669  root -l
+  670  hadd SUM.root Data.root TTLLorLTAUL.root TTbkg.root ST.root W.root DY.root Diboson.root 
+  671  ll
+  672  mkdir AnupNLept_NewtriggSFs
+  673  mv *.root AnupNLept_NewtriggSFs/
+  674  ll
+  675  cd ..
+  676  ll
+  677  rm *.root
+  678  ll
+  679  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.root ; done
+  680  ll TTLLorLTAUL/
+  681  cd ~/Johan/TTbar/ExperimentalSystematics/
+  682  ll
+  683  gedit Analizer.cc &
+  684  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  685  cd ~/Johan/TTMue/
+  686  ll
+  687  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.dag.* ; done
+  688  ll
+  689  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do condor_submit_dag $dir/$dir.dag ; done
+  690  watch condor_q gdamolin
+  691  cd ZZ
+  692  ll -rt
+  693  cd out 
+  694  ll -rt
+  695  vim 858390.0.out
+  696  vim 851149.0.out
+  697  watch condor_q gdamolin
+  698  SetCmsenv 
+  699  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  700  ll
+  701  ll -rt  *.txt 
+  702  gedit Memo2.txt &
+  703  combine -M MultiDimFit --algo singles -t -1 -d datacardTTMU.txt -n.TTMU -v 1 --expectSignal 1
+  704  combine -M MultiDimFit --algo singles -t -1 -d datacardTTTau.txt -n.TTT -v 1 --expectSignal 1
+  705  combine -M MultiDimFit --algo singles -t -1 -d datacardDYTau.txt -n.DYT -v 1 --expectSignal 1
+  706  combine -M MultiDimFit --algo singles -t -1 -d datacardDYMu.txt -n.DYM -v 1 --expectSignal 1
+  707  gedit datacardDYMu.txt datacardDYTau.txt DYM.txt DYT.txt
+  708  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  709  combine -M MultiDimFit --algo singles -t -1 -d DYT.txt -n.DYT -v 1 --expectSignal 1
+  710  SetCmsenv 
+  711  voms
+  712  cd Johan/TTbar/Python_Analysis/
+  713  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+  714  condor_q gdamoli
+  715  condor_q gdamolin
+  716  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+  717  condor_q gdamoli
+  718  condor_q gdamolin
+  719  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+  720  SetCmsenv 
+  721  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+  722  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  723  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1
+  724  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  725  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.5
+  726  ll -rt
+  727  gedit Memo2.txt &
+  728  history > Herewegoagain.txt
+  729  gedit Herewegoagain.txt &
+  730  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.5
+  731  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.9
+  732  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.91
+  733  SetCmsenv 
+  734  cdeos
+  735  cd TTOutput/
+  736  ll
+  737  root -l
+  738  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do hadd $dir.root $dir/*.root ; done
+  739  root -l
+  740  ll
+  741  ll TTLLorLTAUL
+  742  cd ..
+  743  ll
+  744  cd TTOutput/
+  745  ll
+  746  rm TTLLorLTAUL.root 
+  747  hadd TTLLorLTAUL.root TTLLorLTAUL/*.root
+  748  root -l TTLLorLTAUL/5D2E4672-C7D3-AF49-B699-E0F7E83A699C_MA.root
+  749  rm TTLLorLTAUL/5D2E4672-C7D3-AF49-B699-E0F7E83A699C_MA.root
+  750  hadd TTLLorLTAUL.root TTLLorLTAUL/*.root
+  751  rm TTLLorLTAUL.root 
+  752  hadd TTLLorLTAUL.root TTLLorLTAUL/*.root
+  753  cd ..
+  754  ll
+  755  cd TTOutput/
+  756  ll
+  757  root -l
+  758  hadd Corr/Data.root EGamma_?.root
+  759  cd Corr/
+  760  ll
+  761  hadd Diboson.root WW.root ZW.root ZZ.root 
+  762  hadd DY.root DY?.root
+  763  hadd W.root W?j.root
+  764  hadd TTbkg.root TTSemileptonic.root TThad.root 
+  765  hadd ST.root St.root St_?.root Santit*.root
+  766  hadd SUM.root Data.root TTLLorLTAUL.root TTbkg.root ST.root W.root DY.root Diboson.root 
+  767  cd ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU
+  768  ll
+  769  gedit RecentHist.txt &
+  770  gedit DYM.txt DYT.txt &
+  771  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  772  SetCmsenv 
+  773  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/
+  774  cd LFU
+  775  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  776  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.9
+  777  combine -M MultiDimFit --algo singles -t 20 -d DYM.txt -n.DYM -v 1 
+  778  ll
+  779  ll -rt
+  780  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  781  combine -M MultiDimFit --algo singles -t 50 -d DYM.txt -n.DYM -v 1 
+  782  SetCmsenv 
+  783  voms
+  784  cd CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  785  ll
+  786  ll -rt
+  787  gedit Herewegoagain.txt &
+  788  gedit DYM.txt &
+  789  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  790  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.6
+  791  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.55
+  792   ll -rt *.txt
+  793  gedit datacardDYMu.txt &
+  794  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.55
+  795  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  796  combine -M MultiDimFit --algo singles -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 0.9
+  797  combine -M MultiDimFit --algo grid -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1
+  798  ll -rt
+  799  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  800  combine -M MultiDimFit --algo grid -t -1 -d DYM.txt -n.DYM -v 1 --expectSignal 1 --rMin=0 --rMax=2
+  801  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  802  text2workspace.py  DYM.txt -o DYMtest.root
+  803  combine -M MultiDimFit --algo grid -t -1 -d DYMtest.txt -n.DYM -v 1 --expectSignal 1 --rMin=0.8 --rMax=1.2
+  804  combine -M MultiDimFit --algo grid -t -1 -d DYMtest.root -n.DYM -v 1 --expectSignal 1 --rMin=0.8 --rMax=1.2
+  805  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  806  text2workspace.py  DYM.txt -o DYMtest.root
+  807  combine -M MultiDimFit --algo grid -t -1 -d DYMtest.root -n.DYM -v 1 --expectSignal 1 --rMin=0.8 --rMax=1.2
+  808  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  809  combine -M MultiDimFit --algo grid -d DYMtest.root -n.DYM -v 1 --rMin=0.8 --rMax=1.3
+  810  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  811  combine -M MultiDimFit --algo grid -d DYMtest.root -n.DYM -v 1 --rMin=1 --rMax=1.05
+  812  root -l higgsCombine.DYM.MultiDimFit.mH120.root
+  813  cdeos
+  814  cd Examples/EgammaData/
+  815  ll
+  816  fs lq
+  817  cd ~
+  818  fs lq
+  819  cdeos
+  820  cd ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/data/LFU/
+  821  ll -rt
+  822  gedit DYM.txt &
+  823  combine -M FitDiagnostic --algo grid -d DYMtest.root -n.DYM -v 1 --rMin=1 --rMax=1.05
+  824  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 1 --rMin=1 --rMax=1.05
+  825  ll -rt
+  826  python diffNuisances.py fitDiagnostics.DYM.root
+  827  python3 diffNuisances.py fitDiagnostics.DYM.root
+  828  python3 ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/macros/diffNuisances.py fitDiagnostics.DYM.root
+  829  python3 ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py fitDiagnostics.DYM.root
+  830  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 1 --rMin=1 --rMax=1.05 -t -1
+  831  python3 diffNuisances.py fitDiagnostics.DYM.root
+  832  combine -M FitDiagnostic  -d DYMtest.root -n.DYM -v 1 --rMin=0.6 --rMax=1.4 -t -1
+  833  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 1 --rMin=0.6 --rMax=1.4 -t -1
+  834  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 2 --rMin=0.6 --rMax=1.4 -t -1
+  835  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 2 --rMin=0.6 --rMax=1.4 -t -1 --robustFit
+  836  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 2 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1
+  837  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1
+  838  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1 --cminDefaultMinimizerAlgo 0
+  839  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1 --cminDefaultMinimizerType 0
+  840  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1 --cminDefaultMinimizerStrategy 0
+  841  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1 --cminDefaultMinimizerStrategy 0 --cminDefaultMinimizerTolerance 0.01
+  842  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.6 --rMax=1.4 -t -1 --robustFit 1 --cminDefaultMinimizerStrategy 2 --cminDefaultMinimizerTolerance 0.01
+  843  combine -M GenerateOnly DYMtest.root -t -q --saveToys --setParameters r=1
+  844  combine -M GenerateOnly DYMtest.root -t -1 --saveToys --setParameters r=1
+  845  ll -rt
+  846  combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTestenerateOnly.mH120.123456.root:toys/toy_asimov
+  847  combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTest.GenerateOnly.mH120.123456.root:toys/toy_asimov
+  848  ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/test/combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTest.GenerateOnly.mH120.123456.root:toys/toy_asimov
+  849  ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/scripts/combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTest.GenerateOnly.mH120.123456.root:toys/toy_asimov
+  850  ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/macros/combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTest.GenerateOnly.mH120.123456.root:toys/toy_asimov
+  851  ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTest.GenerateOnly.mH120.123456.root:toys/toy_asimov
+  852  python3 ~/CMSSW_12_4_1_patch1/src/CombineHarvester/CombineTools/scripts/combineTool.py -M FastScan -w DYMtest.root:w -d higgsCombineTest.GenerateOnly.mH120.123456.root:toys/toy_asimov
+  853  ll -rt
+  854  evince nll.pdf &
+  855  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.8 --rMax=1.2 -t -1 --robustFit 1 --robustHesse 1
+  856  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.8 --rMax=1.2 --robustFit 1 --robustHesse 1
+  857  combine -M FitDiagnostics -d DYMtest.root -n.DYM -v 3 --rMin=0.8 --rMax=1.2 -t -1 --robustFit 1 --robustHesse 1
+  858  combine -M FitDiagnostics -d venerdi.txt -n.DYM -v 3 --rMin=0.8 --rMax=1.2 -t -1 --robustFit 1 --robustHesse 1
+  859  combine -M FitDiagnostics -d venerdi.txt -n.DYM -v 3 --rMin=0.8 --rMax=1.2 -t -1 --robustFit 1
+  860  combine -M FitDiagnostics -d venerdi.txt -n.DYM -v 3 --rMin=0.8 --rMax=1.2 -t -1 --robustFit 1 --skipSBFit
+  861  combine -M MultiDimFit --algo grid --points 3000 -t -1 IwantAll.txt -n.3All -v 1 --expectSignal 1 --setParameterRanges r=0.9,1.1:rateDY=0.7,1.3 -P r -P rateDY --fitNuisances=1
+  862  python3 ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py fitDiagnostics.DYM.root
+  863  python3 ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py --help
+  864  python3 ~/CMSSW_12_4_1_patch1/src/HiggsAnalysis/CombinedLimit/test/diffNuisances.py fitDiagnostics.DYM.root --skipFitS
+  865  SetCmsenv 
+  866  voms
+  867  cd ~/Johan/TTbs
+  868  cd ~/Johan/TTbar/
+  869  ll
+  870  cd ExperimentalSystematics/
+  871  ll
+  872  gedit Analizer.cc  DataControl.cc &
+  873  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  874  ./test.exe /eos/user/g/gdamolin/Examples/EgammaData/00B7FFB1-3455-C941-AE3B-CF7085966A41.root dt.root 82000 59 true false data
+  875  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  876  ll
+  877  cp *.json ~/Johan/TauE/Systs/
+  878  gedit *.json ~/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json &
+  879  cd ~/DYMUMU/DYMuMu/Systs/
+  880  cp SamplesDTplusMC.json ~/DYTAUTAU/DYTauMu/Systs/
+  881  voms
+  882  SetCmsenv 
+  883  cd ~/Johan/TTbar/ExperimentalSystematics/
+  884  ll
+  885  gedit Analizer.cc &
+  886  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  887  cd ~/Johan/TauE/Systs/
+  888  ll
+  889  gedit Analysis.cc ~/Johan/TTbar/ExperimentalSystematics/Analizer.cc &
+  890  cd ~/Johan/TTbar/ExperimentalSystematics/
+  891  ll
+  892  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  893  cd ~/Johan/TauE/Systs/
+  894  ll
+  895  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analysis.cc `root-config --cflags --glibs`
+  896  ll
+  897  cd ~/DYMUMU/DYMuMu/Systs/
+  898  ll
+  899  gedit Analizer.cc &
+  900  cd ~/DYTAUTAU/DYTauMu/Systs/
+  901  ll
+  902  gedit Analysis.cc &
+  903  cdeos
+  904  ll
+  905  cd DYMUMU/
+  906  ll
+  907  rm *.root
+  908  ll
+  909  ll Corr/
+  910  cd Corr/
+  911  ll
+  912  mkdit syst0
+  913  mkdir syst0
+  914  mv DYMuMu.root syst0/
+  915  rm *.root
+  916  ll
+  917  cd ..
+  918  ll
+  919  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.root ; done
+  920  cd ../DYTauMu/
+  921  ll
+  922  rm *.root
+  923  ll
+  924  cd Corr/
+  925  ll
+  926  mkdir syst0
+  927  mv DYTauMu.root syst0/
+  928  cd ..
+  929  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.root ; done
+  930  cd ..
+  931  ll
+  932  cd TTOutput/
+  933  ll
+  934  rm *.root
+  935  cd Corr/
+  936  ll
+  937  ll SYSTS0/
+  938  ll -rt
+  939  rm *.root
+  940  ll
+  941  cd ..
+  942  ll
+  943  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.root ; done
+  944  cd ..
+  945  ll
+  946  cd TT2taue/
+  947  ll
+  948  rm *.root
+  949  ll
+  950  cd Corr/
+  951  ll
+  952  mkdir syst0
+  953  mv TTTauE.root syst0/
+  954  rm *.root
+  955  cd ..
+  956  ll
+  957  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.root ; done
+  958  cd ~
+  959  ll
+  960  cd DYMUMU/
+  961  ll
+  962  cd SUBDIR/
+  963  ll
+  964  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.* ; done
+  965  cd ../../DYTAUTAU/SUBDIR/
+  966  ll
+  967  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.* ; done
+  968  cd ~/Johan/TTMue/
+  969  ll
+  970  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.* ; done
+  971  cd ..
+  972  ll
+  973  cd te/All/
+  974  ll
+  975  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do rm $dir/*.* ; done
+  976  cd ~/Johan/TTbar/ExperimentalSystematics/
+  977  ll
+  978  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  979  python3 submit_dag_ROOT.py -i /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput/ -j /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/SamplesDTplusMC.json -e /afs/cern.ch/user/g/gdamolin/Johan/TTbar/ExperimentalSystematics/run.sh -pr /afs/cern.ch/user/g/gdamolin/private/x509up_u151129 -s
+  980  cd ~/Johan/TTMue/
+  981  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do condor_submit_dag $dir/$dir.dag ; done
+  982  cd ~/Johan/TauE/Systs/
+  983  ll
+  984  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analysis.cc `root-config --cflags --glibs`
+  985  python3 submit_dag_ROOT.py -i /afs/cern.ch/user/g/gdamolin/Johan/te/All/ -o /eos/user/g/gdamolin/TT2taue/ -j /afs/cern.ch/user/g/gdamolin/Johan/TauE/Systs/SamplesDTplusMC.json -e /afs/cern.ch/user/g/gdamolin/Johan/TauE/Systs/run.sh -pr /afs/cern.ch/user/g/gdamolin/private/x509up_u151129 -s
+  986  cd ~/Johan/te/All/
+  987  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do condor_submit_dag $dir/$dir.dag ; done
+  988  cd ~/DYMUMU/DYMuMu/Systs/
+  989  ll
+  990  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analizer.cc `root-config --cflags --glibs`
+  991  python3 submit_dag_ROOT.py -i /afs/cern.ch/user/g/gdamolin/DYMUMU/SUBDIR/ -o /eos/user/g/gdamolin/DYMUMU/ -j /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/SamplesDTplusMC.json -e /afs/cern.ch/user/g/gdamolin/DYMUMU/DYMuMu/Systs/run.sh -pr /afs/cern.ch/user/g/gdamolin/private/x509up_u151129 -s
+  992  cd ~/DYMUMU/SUBDIR/
+  993  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do condor_submit_dag $dir/$dir.dag ; done
+  994  cd ~/DYTAUTAU/DYTauMu/Systs/
+  995  g++ $(correction config --cflags --ldflags --rpath) -o test.exe Analysis.cc `root-config --cflags --glibs`
+  996  python3 submit_dag_ROOT.py -i /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j /afs/cern.ch/user/g/gdamolin/DYTAUTAU/DYTauMu/Systs/SamplesDTplusMC.json -e /afs/cern.ch/user/g/gdamolin/DYTAUTAU/DYTauMu/Systs/run.sh -pr /afs/cern.ch/user/g/gdamolin/private/x509up_u151129 -s
+  997  cd ~/DYTAUTAU/SUBDIR/
+  998  ll
+  999  for dir in $(find ./ -maxdepth 1 -mindepth 1 -type d); do condor_submit_dag $dir/$dir.dag ; done
+ 1000  watch condor_q gdamolin
+ 1001  voms
+ 1002  SetCmsenv 
+ 1003  condor_q gdamolin
+ 1004  cd ~/Johan/TTbar/Python_Analysis/
+ 1005  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/TTMue/ -o /eos/user/g/gdamolin/TTOutput -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+ 1006  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/Johan/te/All -o /eos/user/g/gdamolin/TT2taue/ -j ../ExperimentalSystematics/SamplesDTplusMC.json -r
+ 1007  cd ~/DYMUMU/DYMuMu/
+ 1008  ll
+ 1009  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/DYMUMU/SUBDIR/ -o /eos/user/g/gdamolin/DYMUMU/ -j Systs/SamplesDTplusMC.json -r
+ 1010  cd ~/DYTAUTAU/DYTauMu/
+ 1011  ll
+ 1012  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j Systs/SamplesDTplusMC.json -r
+ 1013  condor_q gdamoli
+ 1014  condor_q gdamolin
+ 1015  python3 rescue.py -s /afs/cern.ch/user/g/gdamolin/DYTAUTAU/SUBDIR/ -o /eos/user/g/gdamolin/DYTauMu/ -j Systs/SamplesDTplusMC.json -r
+ 1016  cd ~/DYMUMU/DYMuMu/
+ 1017  history > lol.txt
