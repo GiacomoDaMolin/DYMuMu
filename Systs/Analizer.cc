@@ -252,33 +252,46 @@ cout<<"Call completed!"<<endl;
 	}
      }
     else for(int i=0;i<observables.size();i++) {Histos.push_back(temp); if(observables2.size()>0){HistosTL.push_back(temp); HistosTT.push_back(temp);}}
+    float ptbin[31]={25,28,30,32,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,50,52,54,57,60,65,70,78,95,125,155,205};
+    float massbin[57]={12,25,35,45,50,
+53,56,59,62,64,
+66,68,70,71,72,
+73,74,75,76,77,
+78,79,80,81,82,
+83,84,85,86,87,
+88,89,90,91,92,
+93,94,95,96,97,
+98,99,100,102,104,
+107,110,115,120,125,
+130,140,160,180,200,
+250,300};
 
     //get histos nominal values
-    temp= new TH1D(observables[0].c_str(),observables[0].c_str(),40,25,205);
+    temp= new TH1D(observables[0].c_str(),observables[0].c_str(),30,ptbin);
     Histos[0] = (TH1D*)temp->Clone();
     temp = new TH1D(observables[1].c_str(),observables[1].c_str(),40,0, 2*M_PI);
     Histos[1] = (TH1D*)temp->Clone();
-    temp= new TH1D(observables[2].c_str(),observables[2].c_str(),40, 12, 412);
+    temp= new TH1D(observables[2].c_str(),observables[2].c_str(),56, massbin);
     Histos[2] = (TH1D*)temp->Clone();
-    temp = new TH1D(observables[3].c_str(),observables[3].c_str(),12,0,12);
+    temp = new TH1D(observables[3].c_str(),observables[3].c_str(),6,0,6);
     Histos[3] = (TH1D*)temp->Clone();
     if(HistosTT.size()>0){
-	temp= new TH1D(observables2[0].c_str(),observables2[0].c_str(),40,25,205);
+	temp= new TH1D(observables2[0].c_str(),observables2[0].c_str(),30,ptbin);
 	HistosTL[0] = (TH1D*)temp->Clone();
 	temp = new TH1D(observables2[1].c_str(),observables2[1].c_str(),40,0, 2*M_PI);
 	HistosTL[1] = (TH1D*)temp->Clone();
-	temp = new TH1D(observables2[2].c_str(),observables2[2].c_str(),40, 12, 412);
+	temp = new TH1D(observables2[2].c_str(),observables2[2].c_str(),56,massbin);
 	HistosTL[2]= (TH1D*)temp->Clone(); 
-	temp= new TH1D(observables2[3].c_str(),observables2[3].c_str(),12,0,12);
+	temp= new TH1D(observables2[3].c_str(),observables2[3].c_str(),6,0,6);
 	HistosTL[3] = (TH1D*)temp->Clone();
 
-	temp= new TH1D(observables3[0].c_str(),observables3[0].c_str(),40,25,205);
+	temp= new TH1D(observables3[0].c_str(),observables3[0].c_str(),30,ptbin);
 	HistosTT[0] = (TH1D*)temp->Clone();
 	temp = new TH1D(observables3[1].c_str(),observables3[1].c_str(),40,0, 2*M_PI);
 	HistosTT[1] = (TH1D*)temp->Clone();
-	temp = new TH1D(observables3[2].c_str(),observables3[2].c_str(),40, 12, 412);
+	temp = new TH1D(observables3[2].c_str(),observables3[2].c_str(),56, massbin);
 	HistosTT[2]= (TH1D*)temp->Clone(); 
-	temp= new TH1D(observables3[3].c_str(),observables3[3].c_str(),12,0,12);
+	temp= new TH1D(observables3[3].c_str(),observables3[3].c_str(),6,0,6);
 	HistosTT[3] = (TH1D*)temp->Clone();
     }
 
@@ -509,6 +522,7 @@ cout<<"Call completed!"<<endl;
         muon2_eta = Muon2_p4->Eta();
         invMass = (*(Muon1_p4) + *(Muon2_p4)).M();
 	Acoplanarity=M_PI-(Muon1_p4->DeltaPhi(*Muon2_p4));
+	if(cat==0) cout<<" Number of event with MC issue: "<< i <<endl;
 	
 	for(int k=0;k<VecWeights.size();k++){
 		if(cat==0 || cat==2){

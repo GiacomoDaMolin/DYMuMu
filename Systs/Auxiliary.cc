@@ -97,9 +97,10 @@ int getCategoryTT(Int_t * pdgId,Int_t *IdxMother, Int_t Ngen) {
 int getCategoryDY(Int_t * pdgId,Int_t *IdxMother, Int_t Ngen) {
    int cat=0;
    bool foundZ=false;
+   bool recover=false;
    //fZ is always index==2, daughter of index 0
-   for(int i=2;i<Ngen;i++){
-   	if(pdgId[i]==22 || pdgId[i]==23 && ((IdxMother[i]==0 || IdxMother[i]==1) || i==2)){
+   for(int i=0;i<Ngen;i++){
+   	if((pdgId[i]==22 || pdgId[i]==23) && (IdxMother[i]==0 || IdxMother[i]==1)){
    	foundZ=true;
    	int idx=i,startPdg=pdgId[i];
    	for(int j=i;j<Ngen;j++){
@@ -113,7 +114,18 @@ int getCategoryDY(Int_t * pdgId,Int_t *IdxMother, Int_t Ngen) {
    if(foundZ) break;
    }
  }  
- if (cat==0) cout<<"Z classification not found"<<endl;
+ if (cat==0) {cout<<"Z classification not found "; recover=true;}
+ if(recover) { cout<<" ..trying to recover.. ";
+	for(int i=0;i<Ngen;i++){
+		if(abs(pdgId[i])==11 && IdxMother[i]<2) { cat=2; break;} //->ee
+   		if(abs(pdgId[i])==13 && IdxMother[i]<2) { cat=3; break;} //->mumu
+   		if(abs(pdgId[i])==15 && IdxMother[i]<2) { cat=4; break;} //->tautau
+		}	
+ }
+ if(recover) {
+ 	if(cat==0) cout<<" FAILED!!"<<endl;
+ 	else cout<<" SUCCESS!! Recovered a "<<cat<<endl;
+ }	
  return cat;
 }
 #endif // Auxiliary_cpp
