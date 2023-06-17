@@ -8,6 +8,21 @@
 using std::vector;
 using std::string;
 using std::cout; using std::endl;
+using json = nlohmann::json;
+
+bool lumicheck(json& goldenjson,UInt_t run,UInt_t luminosityBlock){
+ string run_s = std::to_string(run);
+ //string lumi_s = std::to_string(luminosityBlock);
+ if (goldenjson[run_s]==nullptr) return true; //run not in golden json
+
+ for(int i=0;i<goldenjson[run_s].size();i++){	
+	if(luminosityBlock>=goldenjson[run_s][i][0] && luminosityBlock<=goldenjson[run_s][i][1])  return false; //if run found, look if lumisec is in good interval
+ }
+ 
+ return true; //if lumiblock is not found, it's not in the json --> discard the event
+
+}
+
 
 float getTopPtWeight(Int_t * pdgId,Int_t *statusFlags,Float_t * pt, Int_t Ngen) {
     float wgt=1.0;
