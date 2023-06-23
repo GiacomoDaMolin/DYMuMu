@@ -129,6 +129,30 @@ void Mixed_Analysis(string inputFile, string ofile, double crossSection = -1, do
     tin->SetBranchStatus("HLT_IsoMu24", 1);
     tin->SetBranchAddress("HLT_IsoMu24", &HLT_IsoMu24);
 
+    Bool_t Flag_goodVertices, Flag_globalSuperTightHalo2016Filter, Flag_HBHENoiseFilter, Flag_HBHENoiseIsoFilter, Flag_EcalDeadCellTriggerPrimitiveFilter, Flag_BadPFMuonFilter, Flag_BadPFMuonDzFilter, Flag_eeBadScFilter, Flag_ecalBadCalibFilter;
+    
+    
+    tin->SetBranchStatus("Flag_goodVertices", 1);
+    tin->SetBranchAddress("Flag_goodVertices", &Flag_goodVertices);
+    tin->SetBranchStatus("Flag_globalSuperTightHalo2016Filter", 1);
+    tin->SetBranchAddress("Flag_globalSuperTightHalo2016Filter", &Flag_globalSuperTightHalo2016Filter);
+    tin->SetBranchStatus("Flag_HBHENoiseFilter", 1);
+    tin->SetBranchAddress("Flag_HBHENoiseFilter", &Flag_HBHENoiseFilter);
+    
+    tin->SetBranchStatus("Flag_HBHENoiseIsoFilter", 1);
+    tin->SetBranchAddress("Flag_HBHENoiseIsoFilter", &Flag_HBHENoiseIsoFilter);
+    tin->SetBranchStatus("Flag_EcalDeadCellTriggerPrimitiveFilter", 1);
+    tin->SetBranchAddress("Flag_EcalDeadCellTriggerPrimitiveFilter", &Flag_EcalDeadCellTriggerPrimitiveFilter);
+    tin->SetBranchStatus("Flag_BadPFMuonFilter", 1);
+    tin->SetBranchAddress("Flag_BadPFMuonFilter", &Flag_BadPFMuonFilter);
+    
+    tin->SetBranchStatus("Flag_BadPFMuonDzFilter", 1);
+    tin->SetBranchAddress("Flag_BadPFMuonDzFilter", &Flag_BadPFMuonDzFilter);
+    tin->SetBranchStatus("Flag_eeBadScFilter", 1);
+    tin->SetBranchAddress("Flag_eeBadScFilter", &Flag_eeBadScFilter);
+    tin->SetBranchStatus("Flag_ecalBadCalibFilter", 1);
+    tin->SetBranchAddress("Flag_ecalBadCalibFilter", &Flag_ecalBadCalibFilter);
+
     // collect the triggger Ids
     Int_t Muon_charge[MAX_ARRAY_SIZE], Muon_nTrackerLayers[MAX_ARRAY_SIZE];
     Bool_t Muon_triggerIdLoose[MAX_ARRAY_SIZE], Muon_tightId[MAX_ARRAY_SIZE];
@@ -267,18 +291,8 @@ void Mixed_Analysis(string inputFile, string ofile, double crossSection = -1, do
      }
     else for(int i=0;i<observables.size();i++) {Histos.push_back(temp); if(observables2.size()>0){HistosTL.push_back(temp); HistosTT.push_back(temp);}}
     float ptbin[31]={25,28,30,32,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,50,52,54,57,60,65,70,78,95,125,155,205};
-    float massbin[57]={12,25,35,45,50,
-53,56,59,62,64,
-66,68,70,71,72,
-73,74,75,76,77,
-78,79,80,81,82,
-83,84,85,86,87,
-88,89,90,91,92,
-93,94,95,96,97,
-98,99,100,102,104,
-107,110,115,120,125,
-130,140,160,180,200,
-250,300};
+    float massbin[57]={12,25,35,45,50,53,56,59,62,64,66,68,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,
+90,91,92,93,94,95,96,97,98,99,100,102,104,107,110,115,120,125,130,140,160,180,200,250,300};
 
     //get histos nominal values
     temp= new TH1D(observables[0].c_str(),observables[0].c_str(),30,ptbin);
@@ -342,7 +356,7 @@ void Mixed_Analysis(string inputFile, string ofile, double crossSection = -1, do
 
    if(systematics && auxindex!=observables.size()*(systs.size()*2+1)-1) cout<<"Something may go terribly wrong here!"<< auxindex<<" vs "<<observables.size()*(systs.size()*2+1)-1 <<endl;
    int cat=0; //category of final state index
-   int rej_badlumi=0, ndropped_m=0;
+   int rej_badlumi=0, ndropped_m=0,n_metdropped=0; 
     #pragma omp parallel for
     for (UInt_t i = 0; i <nEv; i++){
 	cat=0;
@@ -352,7 +366,9 @@ void Mixed_Analysis(string inputFile, string ofile, double crossSection = -1, do
 	//apply lumiblockselections
 	if(Data && lumicheck(goldenjson, run, luminosityBlock)) {rej_badlumi++; continue;} //jump event if bool is true, i.e. not good lumisec
 
-	//TODO: MET-filters
+	//MET-filters
+	bool met_filt=Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_BadPFMuonDzFilter && Flag_eeBadScFilter && Flag_ecalBadCalibFilter;
+     	if (!(met_filt)) {n_metdropped++; continue;}
 
         
         if (!(HLT_IsoMu24)){trigger_dropped++; continue;}
@@ -574,11 +590,11 @@ void Mixed_Analysis(string inputFile, string ofile, double crossSection = -1, do
         tout->Fill();
     }
 
-
-    
     std::cout << "NeV = " << nEv << endl;
     std::cout << "discarded by lumi .json" <<rej_badlumi <<endl;
+    std::cout << "discarded by met-filters" <<n_metdropped <<endl;
     nEv-=rej_badlumi;
+    nEv-=n_metdropped;
     std::cout << "trigger dropped = " << trigger_dropped << endl;
     std::cout << "selections dropped = " << n_dropped << endl; //remember the cross trigger in Data
     std::cout << "dropped by mass requirement " << ndropped_m << endl;
